@@ -15,12 +15,8 @@ function App() {
     let wscols = [];
 
     for (let i = 0; i < header.length; i++) {  
-      let maxLength = 0
-      for (let j = 0; j < data.length; j++) {
-        if (Object.values(data[j])[i].toString().length > maxLength) {
-          maxLength = Object.values(data[j])[i].toString().length 
-        }
-      }
+      const values = data.map(row => Object.values(row)[i].toString().length)  
+      const maxLength = Math.max(...values)
       wscols.push({ wch: Math.max(maxLength, header[i].length)})
     }
     const workSheet = xlsx.utils.json_to_sheet(data);
